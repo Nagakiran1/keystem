@@ -63,14 +63,17 @@ class KeyStem:
         self,
         text
     ):
-        # text = rashes_text
-        sents = nltk.tokenize.sent_tokenize(text)
+        if isinstance(text, list) and text:
+            keywords = text
+        else:
+            # text = rashes_text
+            sents = nltk.tokenize.sent_tokenize(text)
 
-        keywords = []
-        for sent in sents:
-            phrases = self.kw_model.extract_keywords(sent, keyphrase_ngram_range=(1, 2), stop_words=None)
-            keywords.extend([p for p in phrases if p[1]>0.3])
-
+            keywords = []
+            for sent in sents:
+                phrases = self.kw_model.extract_keywords(sent, keyphrase_ngram_range=(1, 2), stop_words=None)
+                keywords.extend([p for p in phrases if p[1]>0.3])
+        
 
         res = pd.DataFrame()
         res['keywords'] = keywords

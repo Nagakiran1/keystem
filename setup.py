@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 
 setup(
     name = "keystem",
-    version = "1.0.1",
+    version = "1.0.2",
     author = "Naga",
     author_email = "naga@caspai.in",
     description = "This project helps to have git version for S3 buckets."  ,
@@ -28,4 +28,10 @@ setup(
     
 )
 
-    # python setup.py sdist bdist_wheel
+# https://www.freecodecamp.org/news/how-to-create-and-upload-your-first-python-package-to-pypi/
+# python setup.py sdist bdist_wheel
+
+# to build and push library 
+# Change version in pyproject and setup
+# python3 -m build
+# twine upload --repository testpypi dist/*

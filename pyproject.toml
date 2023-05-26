@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "keystem"
-version = "1.0.1"
+version = "1.0.2"
 description = "Extract the keywords from the given text and assign root of the key for each cluster keys"
 readme = "README.md"
 authors = [{ name = "Naga", email = "naga@caspai.in" }]
