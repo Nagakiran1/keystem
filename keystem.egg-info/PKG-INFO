@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: keystem
-Version: 1.0.2
+Version: 1.0.3
 Summary: Extract the keywords from the given text and assign root of the key for each cluster keys
 Home-page: https://github.com/Nagakiran1/keystem.git
 Author: Naga

@@ -61,27 +61,34 @@ class KeyStem:
 
     def get_keygroups(
         self,
-        text='',
-        keyphrase_ngram_range=(1,2),
-        keywords=[],
-        stop_words=None,
-        keyword_threshold=0.3
+        text,
+        by_sents=False,
+        pos=True,
+        keyword_thresh = 0.3
     ):
-        if text and not keywords:
-            # text = rashes_text
-            sents = nltk.tokenize.sent_tokenize(text)
+        if isinstance(text, list) and text:
+            keywords = text
+            keywords = [(k, 1) for k in keywords]
+        else:
+            if by_sents:    
+                # text = rashes_text
+                sents = nltk.tokenize.sent_tokenize(text)
 
-            keywords = []
-            for sent in sents:
-                phrases = self.kw_model.extract_keywords(sent, keyphrase_ngram_range=keyphrase_ngram_range, stop_words=stop_words)
-                keywords.extend([p for p in phrases if p[1]>keyword_threshold])
-
+                keywords = []
+                for sent in sents:
+                    phrases = self.kw_model.extract_keywords(sent, keyphrase_ngram_range=(1, 2), stop_words=None)
+                    keywords.extend([p for p in phrases if p[1]>keyword_thresh])
+                # keywords =[k[0] for k in keywords]
+            else:
+                keywords = self.kw_model.extract_keywords(text, keyphrase_ngram_range=(1, 2), stop_words=None)
+                keywords =[k for k in keywords if k[1]>keyword_thresh]
+                
         res = pd.DataFrame()
         res['keywords'] = keywords
         res['text'] = [p[0] for p in res['keywords']]
+        # res['text'] = keywords
 
-
-        res['features'] = res['text'].apply(lambda x: self.preprocess(x, pos=False))
+        res['features'] = res['text'].apply(lambda x: self.preprocess(x, pos=pos))
         res = res.reset_index(drop=True)
         word_frame = res#[['features','keywords']]
         word_frame = word_frame.explode('features')

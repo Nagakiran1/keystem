@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 
 setup(
     name = "keystem",
-    version = "1.0.2",
+    version = "1.0.3",
     author = "Naga",
     author_email = "naga@caspai.in",
     description = "This project helps to have git version for S3 buckets."  ,
@@ -34,4 +34,4 @@ setup(
 # to build and push library 
 # Change version in pyproject and setup
 # python3 -m build
-# twine upload --repository testpypi dist/*
+# twine upload --skip-existing --repository pypi dist/*
