@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 
 setup(
     name = "keystem",
-    version = "1.0.4",
+    version = "1.0.5",
     author = "Naga",
     author_email = "naga@caspai.in",
     description = "This project helps to have git version for S3 buckets."  ,

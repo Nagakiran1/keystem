@@ -63,7 +63,7 @@ class KeyStem:
         self,
         text,
         by_sents=False,
-        pos=True,
+        pos=False,
         keyword_thresh = 0.3
     ):
         if isinstance(text, list) and text:
@@ -94,6 +94,7 @@ class KeyStem:
         word_frame = word_frame.explode('features')
         word_frame = word_frame.reset_index()
         # word_frame['frame_index'] = word_frame.reset_index
+        word_frame = word_frame.loc[word_frame['features'].notnull()]
         features = np.vstack([i.vector for i in word_frame['features']])
 
 
